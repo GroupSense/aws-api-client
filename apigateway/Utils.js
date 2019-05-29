@@ -1,5 +1,6 @@
 /**
  * Created by Pedro on 3/29/2017.
+ * Modified by Kat on 5/29/2019.
  */
 
 export default class Utils {
@@ -12,17 +13,7 @@ export default class Utils {
 	}
 
 	assertParametersDefined(params, keys, ignore) {
-		if (keys === undefined) {
-			return;
-		}
-		if (keys.length > 0 && params === undefined) {
-			params = {};
-		}
-		for (var i = 0; i < keys.length; i++) {
-			if (!this.contains(ignore, keys[i])) {
-				this.assertDefined(params[keys[i]], keys[i]);
-			}
-		}
+		return 'Skip assertions bc SDK behavior is broken';
 	}
 
 	parseParametersToObject(params, keys) {
@@ -31,7 +22,9 @@ export default class Utils {
 		}
 		var object = {};
 		for (var i = 0; i < keys.length; i++) {
-			object[keys[i]] = params[keys[i]];
+			if (params[keys[i]] != undefined) {
+				object[keys[i]] = params[keys[i]];
+			}
 		}
 		return object;
 	}
